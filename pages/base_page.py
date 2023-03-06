@@ -1,3 +1,4 @@
+from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.remote.webdriver import WebDriver
@@ -12,6 +13,12 @@ class BasePage:
 
     def click(self, locator) -> None:
         WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(locator)).click()
+
+    def find_element(self, locator) -> WebElement:
+        return WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(locator)).find_element(*locator)
+
+    def find_elements(self, locator) -> list:
+        return WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(locator)).find_elements(*locator)
 
     def send_keys(self, locator, text: str) -> None:
         WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(locator)).send_keys(text)
@@ -31,3 +38,6 @@ class BasePage:
 
     def get_current_url(self) -> str:
         return self.driver.current_url
+
+    def get_page_title(self) -> str:
+        return self.driver.title
