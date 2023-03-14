@@ -11,19 +11,19 @@ class BasePage:
     def __init__(self, driver: WebDriver):
         self.driver = driver
 
-    def click(self, locator) -> None:
-        WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(locator)).click()
+    def waiter_click(self, locator) -> None:
+        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(locator)).click()
 
-    def find_element(self, locator) -> WebElement:
+    def waiter_find_element(self, locator) -> WebElement:
         return WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(locator)).find_element(*locator)
 
-    def find_elements(self, locator) -> list:
+    def waiter_find_elements(self, locator) -> list:
         return WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(locator)).find_elements(*locator)
 
-    def send_keys(self, locator, text: str) -> None:
+    def waiter_send_keys(self, locator, text: str) -> None:
         WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(locator)).send_keys(text)
 
-    def get_text(self, locator, text: str) -> str:
+    def waiter_get_text(self, locator, text: str) -> str:
         return WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(locator)).send_keys(text).text
 
     def is_enabled(self, locator) -> bool:
