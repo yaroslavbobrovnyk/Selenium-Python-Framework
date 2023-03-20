@@ -5,6 +5,7 @@ import pytest
 from steps.login_page_steps import LoginPageSteps
 from steps.web_page_steps import WebPageSteps
 from tests.test_base import TestBase
+from utils.constants import *
 
 
 class TestLogin(TestBase):
@@ -20,6 +21,6 @@ class TestLogin(TestBase):
 
     @allure.title("Check that user is logged in")
     def test_login(self):
-        self.login_steps.login(os.getenv("USERNAME"), os.getenv("PASSWORD"))
+        self.login_steps.login(USERNAME, PASSWORD)
 
         self.login_steps.is_profile_wrapper_displayed()

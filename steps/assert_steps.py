@@ -14,6 +14,11 @@ class AssertSteps:
         assert actual_string == expected_string, \
             f"Actual string={actual_string} doesn't equal to expected string={expected_string}"
 
+    @allure.step('Check that string="{actual_string}" does not equal to string="{expected_string}"')
+    def check_strings_not_equals(self, actual_string: str, expected_string: str) -> None:
+        assert actual_string != expected_string, \
+            f"Actual string={actual_string} equals to expected string={expected_string}"
+
     @allure.step('Check that url="{url}" ends with string="{text}"')
     def check_url_ends_with(self, url: str, text: str) -> None:
         assert url.endswith(text), f"Actual url={url} doesn't ends with string={text}"

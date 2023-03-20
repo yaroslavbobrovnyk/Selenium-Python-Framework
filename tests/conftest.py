@@ -13,7 +13,7 @@ def pytest_addoption(parser):
     parser.addoption("--env", action="store", default="prod", help="get environment variable")
 
 
-@pytest.fixture(scope="class")
+@pytest.fixture(autouse=True)
 def init_driver(request):
     browser: str = request.config.getoption("--browser")
     driver: WebDriver = get_driver(browser)
