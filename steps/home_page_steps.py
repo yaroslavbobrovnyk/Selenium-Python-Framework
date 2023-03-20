@@ -8,7 +8,7 @@ class HomePageSteps:
     """This is a class that contains allure steps
         method with definition related to the homepage"""
 
-    def __init__(self, driver: WebDriver):
+    def __init__(self, driver: WebDriver) -> None:
         self.driver: WebDriver = driver
         self.home_page = HomePage(self.driver)
 
