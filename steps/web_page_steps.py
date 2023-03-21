@@ -1,5 +1,6 @@
 import allure
 from selenium.webdriver.remote.webdriver import WebDriver
+from selenium.webdriver.remote.webelement import WebElement
 
 from pages.base_page import BasePage
 
@@ -23,6 +24,14 @@ class WebPageSteps:
     @allure.step('Get page title')
     def get_page_title(self) -> str:
         return self.base_page.get_page_title()
+
+    @allure.step('Switch to new open window')
+    def switch_to_new_window(self) -> None:
+        self.base_page.switch_to_window()
+
+    @allure.step('Upload file')
+    def file_upload(self, file_path: str, element: WebElement) -> None:
+        element.send_keys(file_path)
 
 
 

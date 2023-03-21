@@ -1,6 +1,7 @@
 import allure
 from selenium.webdriver import ActionChains
 from selenium.webdriver.remote.webdriver import WebDriver
+from selenium.webdriver.remote.webelement import WebElement
 
 from pages.nav_bar.elements_page import ElementsPage
 
@@ -69,6 +70,18 @@ class ElementsSteps:
     @allure.step('Get radio button message')
     def get_radio_button_message(self) -> str:
         return self.elements_page.get_radio_button_message()
+
+    @allure.step('Get upload button message')
+    def get_upload_button_message(self) -> str:
+        return self.elements_page.get_upload_button_message()
+
+    @allure.step('Get link={link}')
+    def click_link(self, link: str) -> None:
+        self.elements_page.get_link(link).click()
+
+    @allure.step('Get file upload')
+    def get_file_upload(self) -> WebElement:
+        return self.elements_page.get_file_upload()
 
     @allure.step('Check that title text={expected} is displayed')
     def check_elements_title(self, expected: str, actual: str) -> None:

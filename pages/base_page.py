@@ -15,7 +15,9 @@ class BasePage:
         WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(locator)).click()
 
     def waiter_find_element(self, locator) -> WebElement:
-        return WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(locator)).find_element(*locator)
+        element = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(locator)).find_element(*locator)
+        self.driver.execute_script("arguments[0].scrollIntoView();", element)
+        return element
 
     def waiter_find_elements(self, locator) -> list:
         return WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(locator)).find_elements(*locator)
@@ -41,3 +43,15 @@ class BasePage:
 
     def get_page_title(self) -> str:
         return self.driver.title
+
+    def switch_to_window(self) -> None:
+        cur_window = self.driver.current_window_handle
+
+        windows = self.driver.window_handles
+
+        for window in windows:
+            if cur_window != window:
+                self.driver.switch_to.window(window)
+
+    def switch_to_default_window(self) -> None:
+        self.driver.switch_to.default_content()

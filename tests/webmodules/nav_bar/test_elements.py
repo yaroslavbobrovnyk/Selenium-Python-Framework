@@ -8,7 +8,7 @@ from steps.nav_bar_steps.elements_steps import ElementsSteps
 from steps.web_page_steps import WebPageSteps
 from tests.test_base import TestBase
 from utils.enums.nav_bar_items import *
-from utils.constants import USERNAME, EMAIL, ADDRESS, PERMANENT_ADDRESS
+from utils.constants import USERNAME, EMAIL, ADDRESS, PERMANENT_ADDRESS, UPLOAD_FILE_PATH, UPLOAD_FILE_MESSAGE
 
 
 class TestElements(TestBase):
@@ -89,5 +89,29 @@ class TestElements(TestBase):
 
         self.elements_steps.check_elements_title(expected_title, actual_title)
 
+    @allure.title("Check links redirection")
+    def test_links_redirection(self):
+        link_name = "Home"
 
+        self.elements_steps.click_item_button(NavBarItems.LINKS.value)
+
+        self.elements_steps.click_link(link_name)
+
+        self.web_page_steps.switch_to_new_window()
+
+        actual_current_url = self.web_page_steps.get_current_url()
+
+        self.assert_steps.check_strings_equals(actual_current_url, os.getenv("BASE_URL"))
+
+    @allure.title("Check file can be uploaded")
+    def test_upload(self):
+        self.elements_steps.click_item_button(NavBarItems.UPLOAD.value)
+
+        file_path = os.path.abspath(UPLOAD_FILE_PATH)
+
+        self.web_page_steps.file_upload(file_path, self.elements_steps.get_file_upload())
+
+        upload_button_message: str = self.elements_steps.get_upload_button_message()
+
+        self.elements_steps.check_result(UPLOAD_FILE_MESSAGE, upload_button_message)
 

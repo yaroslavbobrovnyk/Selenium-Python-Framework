@@ -21,6 +21,9 @@ class ElementsPage(BasePage):
     TABLE_ROW = (By.XPATH, "//div[@class='rt-tr-group']")
     TABLE_DELETE_BUTTON =(By.XPATH, "//span[@title='Delete']")
     DOUBLE_CLICK_BUTTON = (By.XPATH, "//button[@id='doubleClickBtn']")
+    LINK = (By.XPATH, "//div[@id='linkWrapper']//a[.='{}']")
+    FILE_UPLOAD =(By.XPATH, "//input[@id='uploadFile']")
+    UPLOAD_MESSAGE = (By.XPATH, "//p[@id='uploadedFilePath']")
 
     def __init__(self, driver: WebDriver) -> None:
         super().__init__(driver)
@@ -37,6 +40,9 @@ class ElementsPage(BasePage):
     def get_item(self, item: str) -> WebElement:
         return self.waiter_find_element((self.ELEMENTS_ITEM[0], self.ELEMENTS_ITEM[1].format(item)))
 
+    def get_link(self, item: str) -> WebElement:
+        return self.waiter_find_element((self.LINK[0], self.LINK[1].format(item)))
+
     def get_checkbox_item(self, item: str) -> WebElement:
         return self.waiter_find_element((self.CHECKBOX_ITEM[0], self.CHECKBOX_ITEM[1].format(item)))
 
@@ -45,6 +51,9 @@ class ElementsPage(BasePage):
 
     def get_radio_button_message(self) -> str:
         return self.waiter_find_element(self.RADIO_BUTTON_MESSAGE).text
+
+    def get_upload_button_message(self) -> str:
+        return self.waiter_find_element(self.UPLOAD_MESSAGE).text
 
     def get_output(self) -> str:
         return self.waiter_find_element(self.OUTPUT).text
@@ -60,3 +69,6 @@ class ElementsPage(BasePage):
 
     def get_double_click_button(self) -> WebElement:
         return self.waiter_find_element(self.DOUBLE_CLICK_BUTTON)
+
+    def get_file_upload(self) -> WebElement:
+        return self.waiter_find_element(self.FILE_UPLOAD)
