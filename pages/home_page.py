@@ -7,7 +7,7 @@ from selenium.webdriver.common.by import By
 
 class HomePage(BasePage):
     """This is a class that contains selectors
-     and methods related to the homepage"""
+     and methods related to the homepage          """
 
     CARD = (By.XPATH, "//h5[contains(text(), '{}')]/ancestor::div[contains(@class, 'top-card')]")
     CARD_BODY = (By.XPATH, "//h5")
