@@ -6,7 +6,7 @@ from selenium.webdriver.remote.webdriver import WebDriver
 
 class BasePage:
     """This class is the parent for all pages,
-    it contains all generics method and utilities"""
+    it contains all generics method and utilities        """
 
     def __init__(self, driver: WebDriver):
         self.driver = driver
